@@ -1,7 +1,9 @@
 package com.api.phoneoperator.services;
 
-import com.api.phoneoperator.models.dao.Client;
+import com.api.phoneoperator.models.dao.ClientDao;
+import com.api.phoneoperator.models.rest.Client;
 import com.api.phoneoperator.repositories.ClientsRepository;
+import com.api.phoneoperator.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,11 @@ public class ClientService {
         this.clientsRepository = clientsRepository;
     }
 
-    public Client getClientDetails(String email) {
+    public ClientDao getClientDetails(String email) {
         return this.clientsRepository.findClientDaoByEmail(email).orElse(null);
+    }
+
+    public void addNewClient(Client client) {
+        this.clientsRepository.save(Converter.clientRestModelToClientDao(client));
     }
 }

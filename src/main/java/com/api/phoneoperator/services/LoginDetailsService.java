@@ -26,4 +26,8 @@ public class LoginDetailsService {
 
         return false;
     }
+
+    public void addNewUser(LoginDetailsDao loginDetailsDao) {
+        this.loginDetailsRepository.save(loginDetailsDao);
+    }
 }

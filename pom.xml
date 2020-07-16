@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.api</groupId>
-	<artifactId>phone-operator</artifactId>
+	<artifactId>phone-operatorDao</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>phone-operator</name>
+	<name>phone-operatorDao</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
