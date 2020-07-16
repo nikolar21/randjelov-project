@@ -1,0 +1,15 @@
+<div>
+  <form [formGroup]="registerForm" class=""login-form>
+    <input formControlName="firstName" placeholder="First Name">
+    <input formControlName="lastName" placeholder="Last Name">
+    <input formControlName="age" placeholder="Age">
+    <input formControlName="positionName" placeholder="Position Name">
+    <input formControlName="email" placeholder="Email"/>
+    <input formControlName="password" placeholder="Password"/>
+    <button (click)="registerOperator()" [disabled]="registerForm.invalid">Sign up</button>
+  </form>
+
+  <h5 routerLink="/login">
+    Sign In
+  </h5>
+</div>
