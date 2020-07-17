@@ -7,6 +7,9 @@ import com.api.phoneoperator.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ClientService {
 
@@ -22,6 +25,18 @@ public class ClientService {
     }
 
     public void addNewClient(Client client) {
+        this.clientsRepository.save(Converter.clientRestModelToClientDao(client));
+    }
+
+    public List<Client> getAllClients() {
+        List<Client> clientArray = new ArrayList<>();
+        this.clientsRepository.findAll()
+                .forEach(clientDao ->clientArray.add(Converter.clientDaoInClientRestModel(clientDao)));
+
+        return clientArray;
+    }
+
+    public void updateClientDetails(Client client) {
         this.clientsRepository.save(Converter.clientRestModelToClientDao(client));
     }
 }

@@ -1,15 +1,17 @@
 <div>
-  <form [formGroup]="registerForm" class=""login-form>
-    <input formControlName="firstName" placeholder="First Name">
-    <input formControlName="lastName" placeholder="Last Name">
-    <input formControlName="age" placeholder="Age">
-    <input formControlName="positionName" placeholder="Position Name">
+  <form [formGroup]="registerForm" class="register-form">
+    <input formControlName="firstName" placeholder="First Name"/>
+    <input formControlName="lastName" placeholder="Last Name"/>
+    <input formControlName="age" placeholder="Age" type="number"/>
+    <input formControlName="positionName" placeholder="Position Name"/>
     <input formControlName="email" placeholder="Email"/>
-    <input formControlName="password" placeholder="Password"/>
+    <input formControlName="password" placeholder="Password" type="password"/>
     <button (click)="registerOperator()" [disabled]="registerForm.invalid">Sign up</button>
   </form>
 
   <h5 routerLink="/login">
     Sign In
   </h5>
+
+  <h4 style="color: red">{{ registrationMessage }}</h4>
 </div>

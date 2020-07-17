@@ -1,1 +1,33 @@
-<p>operator-page works!</p>
+<form [formGroup]="registerClientForm" class="register-form">
+  <input formControlName="firstName" placeholder="First Name"/>
+  <input formControlName="lastName" placeholder="Last Name"/>
+  <input formControlName="age" placeholder="Age" type="number"/>
+  <input formControlName="email" placeholder="Email"/>
+  <input formControlName="password" placeholder="Password" type="password"/>
+  <button (click)="registerClient()" [disabled]="registerClientForm.invalid">Create New Client</button>
+</form>
+<br><hr><br>
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Age</th>
+    <th>Email</th>
+    <th>Minutes Left</th>
+    <th>Megabytes Left</th>
+    <th>Messages Left</th>
+    <th>Payment Amount</th>
+    <th>Add</th>
+  </tr>
+  <tr *ngFor="let client of clientArray">
+    <td>{{ client.firstName }}</td>
+    <td>{{ client.lastName }}</td>
+    <td>{{ client.age }}</td>
+    <td>{{ client.email }}</td>
+    <td>{{ client.minutesLeft }}</td>
+    <td>{{ client.megabytesLeft }}</td>
+    <td>{{ client.messagesLeft }}</td>
+    <td>{{ client.paymentAmount }}</td>
+    <td><button (click)="addResources(client)">Add resources</button></td>
+  </tr>
+</table>

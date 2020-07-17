@@ -4,7 +4,6 @@ import com.api.phoneoperator.models.dao.ClientDao;
 import com.api.phoneoperator.models.dao.OperatorDao;
 import com.api.phoneoperator.models.rest.Client;
 import com.api.phoneoperator.models.rest.Operator;
-import org.springframework.stereotype.Service;
 
 public class Converter {
     public static OperatorDao operatorRestModelToOperatorDao(Operator operator) {
@@ -35,5 +34,21 @@ public class Converter {
         clientDao.setEmail(client.getEmail());
 
         return clientDao;
+    }
+
+    public static Client clientDaoInClientRestModel(ClientDao clientDao) {
+        Client client = new Client();
+        client.setFirstName(clientDao.getFirstName());
+        client.setLastName(clientDao.getLastName());
+        client.setHasPayed(clientDao.isHasPayed());
+        client.setMegabytesLeft(clientDao.getMegabytesLeft());
+        client.setMessagesLeft(clientDao.getMessagesLeft());
+        client.setMinutesLeft(clientDao.getMinutesLeft());
+        client.setPaymentAmount(clientDao.getPaymentAmount());
+        client.setAccountType(clientDao.getAccountType());
+        client.setAge(clientDao.getAge());
+        client.setEmail(clientDao.getEmail());
+
+        return client;
     }
 }

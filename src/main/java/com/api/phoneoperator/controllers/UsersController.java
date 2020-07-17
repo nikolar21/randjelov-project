@@ -3,22 +3,20 @@ package com.api.phoneoperator.controllers;
 import com.api.phoneoperator.models.User;
 import com.api.phoneoperator.models.dao.ClientDao;
 import com.api.phoneoperator.models.dao.LoginDetailsDao;
-import com.api.phoneoperator.models.rest.AuthentificationResponse;
-import com.api.phoneoperator.models.rest.Client;
-import com.api.phoneoperator.models.rest.LoginDetails;
-import com.api.phoneoperator.models.rest.Operator;
+import com.api.phoneoperator.models.rest.*;
 import com.api.phoneoperator.services.ClientService;
 import com.api.phoneoperator.services.LoginDetailsService;
 import com.api.phoneoperator.services.OperatorService;
 import com.api.phoneoperator.utils.Constants;
+import com.api.phoneoperator.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value = "/api/v1/users")
 public class UsersController {
 
@@ -81,5 +79,30 @@ public class UsersController {
         }
 
         return this.operatorService.getOperatorDetails(email);
+    }
+
+    @GetMapping(value = "/get-clients")
+    public ResponseEntity<AllClientsResponse> getAllClients() {
+        List<Client> clients = this.clientService.getAllClients();
+        if (clients != null) {
+            return ResponseEntity.ok(new AllClientsResponse(Constants.SUCCESS_RESPONSE, clients));
+        }
+
+        return ResponseEntity.ok(new AllClientsResponse(Constants.FAIL_RESPONSE, null));
+    }
+
+    @PostMapping(value = "/add-resources")
+    public ResponseEntity<String> addResourcesForGivenClient(@RequestBody ResourcesInfo resourcesInfo) {
+        Client client = Converter.clientDaoInClientRestModel(
+                this.clientService.getClientDetails(resourcesInfo.getClientEmail()));
+        client.setMinutesLeft(client.getMinutesLeft() + resourcesInfo.getMinutesToAdd());
+        client.setMegabytesLeft(client.getMegabytesLeft() + resourcesInfo.getMegabytesToAdd());
+        client.setMessagesLeft(client.getMessagesLeft() + resourcesInfo.getMessagesToAdd());
+        double paymentAmount = client.getMinutesLeft() + client.getMegabytesLeft() + client.getMessagesLeft();
+        client.setPaymentAmount(paymentAmount);
+        this.clientService.updateClientDetails(client);
+
+        return ResponseEntity.ok(Constants.SUCCESS_RESPONSE);
+
     }
 }

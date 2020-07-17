@@ -6,10 +6,12 @@ import {ClientPageComponent} from './client-page/client-page.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
   { path: 'operator-page', component: OperatorPageComponent },
   { path: 'client-page', component: ClientPageComponent }
+
 ];
 
 @NgModule({
