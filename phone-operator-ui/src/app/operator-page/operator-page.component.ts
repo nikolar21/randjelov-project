@@ -4,6 +4,7 @@ import {UserDetails} from '../shared/user-details';
 import {Constants} from '../shared/constants';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ResourcesInfo} from '../shared/resources-info';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-operator-page',
@@ -22,7 +23,7 @@ export class OperatorPageComponent implements OnInit {
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
-  constructor(private mainService: MainService) { }
+  constructor(private mainService: MainService, private router: Router) { }
 
   ngOnInit() {
     this.mainService.getAllClients().subscribe(data => {
@@ -59,5 +60,10 @@ export class OperatorPageComponent implements OnInit {
       }
     });
   }
+  logoutUser() {
+    localStorage.clear
+    this.router.navigate(['/login']);
+
+    }
 
 }

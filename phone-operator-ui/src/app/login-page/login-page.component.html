@@ -1,7 +1,7 @@
 <div>
   <form [formGroup]="loginForm" class=""login-form>
     <input formControlName="email" placeholder="Email"/>
-    <input formControlName="password" placeholder="Password"/>
+    <input formControlName="password" placeholder="Password" type="password"/>
     <button (click)="loginUser()" [disabled]="loginForm.invalid">Log In</button>
   </form>
 
